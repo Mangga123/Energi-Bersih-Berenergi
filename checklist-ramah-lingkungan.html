@@ -44,21 +44,61 @@
                     <div class="bg-green-50 p-6 rounded-lg">
                         <i class="fas fa-home text-green-500 text-3xl mb-4"></i>
                         <h3 class="font-semibold text-xl mb-2">Di Rumah</h3>
-                        <ul class="space-y-2 text-gray-600">
-                            <li>□ Matikan lampu saat tidak digunakan</li>
-                            <li>□ Cabut charger yang tidak dipakai</li>
-                            <li>□ Gunakan air secukupnya</li>
-                            <li>□ Pilah sampah organik dan anorganik</li>
+                        <ul class="space-y-2 text-gray-600" id="homeChecklist">
+                            <li>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-green-500 rounded" data-id="home1">
+                                    <span>Matikan lampu saat tidak digunakan</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-green-500 rounded" data-id="home2">
+                                    <span>Cabut charger yang tidak dipakai</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-green-500 rounded" data-id="home3">
+                                    <span>Gunakan air secukupnya</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-green-500 rounded" data-id="home4">
+                                    <span>Pilah sampah organik dan anorganik</span>
+                                </label>
+                            </li>
                         </ul>
                     </div>
                     <div class="bg-blue-50 p-6 rounded-lg">
                         <i class="fas fa-university text-blue-500 text-3xl mb-4"></i>
                         <h3 class="font-semibold text-xl mb-2">Di Kampus</h3>
-                        <ul class="space-y-2 text-gray-600">
-                            <li>□ Bawa botol minum sendiri</li>
-                            <li>□ Gunakan transportasi umum</li>
-                            <li>□ Minimalisir penggunaan kertas</li>
-                            <li>□ Buang sampah pada tempatnya</li>
+                        <ul class="space-y-2 text-gray-600" id="campusChecklist">
+                            <li>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-500 rounded" data-id="campus1">
+                                    <span>Bawa botol minum sendiri</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-500 rounded" data-id="campus2">
+                                    <span>Gunakan transportasi umum</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-500 rounded" data-id="campus3">
+                                    <span>Minimalisir penggunaan kertas</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-500 rounded" data-id="campus4">
+                                    <span>Buang sampah pada tempatnya</span>
+                                </label>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -68,19 +108,49 @@
                     <div class="bg-purple-50 p-6 rounded-lg">
                         <i class="fas fa-recycle text-purple-500 text-3xl mb-4"></i>
                         <h3 class="font-semibold text-xl mb-2">Daur Ulang</h3>
-                        <ul class="space-y-2 text-gray-600">
-                            <li>□ Kumpulkan barang daur ulang</li>
-                            <li>□ Buat kompos dari sampah organik</li>
-                            <li>□ Kurangi penggunaan plastik</li>
+                        <ul class="space-y-2 text-gray-600" id="recycleChecklist">
+                            <li>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-purple-500 rounded" data-id="recycle1">
+                                    <span>Kumpulkan barang daur ulang</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-purple-500 rounded" data-id="recycle2">
+                                    <span>Buat kompos dari sampah organik</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-purple-500 rounded" data-id="recycle3">
+                                    <span>Kurangi penggunaan plastik</span>
+                                </label>
+                            </li>
                         </ul>
                     </div>
                     <div class="bg-yellow-50 p-6 rounded-lg">
                         <i class="fas fa-bolt text-yellow-500 text-3xl mb-4"></i>
                         <h3 class="font-semibold text-xl mb-2">Hemat Energi</h3>
-                        <ul class="space-y-2 text-gray-600">
-                            <li>□ Cek penggunaan listrik</li>
-                            <li>□ Evaluasi konsumsi energi</li>
-                            <li>□ Rencanakan efisiensi</li>
+                        <ul class="space-y-2 text-gray-600" id="energyChecklist">
+                            <li>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-yellow-500 rounded" data-id="energy1">
+                                    <span>Cek penggunaan listrik</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-yellow-500 rounded" data-id="energy2">
+                                    <span>Evaluasi konsumsi energi</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="form-checkbox h-5 w-5 text-yellow-500 rounded" data-id="energy3">
+                                    <span>Rencanakan efisiensi</span>
+                                </label>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -141,5 +211,39 @@
             </div>
         </div>
     </footer>
+
+    <!-- Add JavaScript for interactive checkboxes -->
+    <script>
+        // Function to load saved checkbox states
+        function loadCheckboxStates() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                const id = checkbox.getAttribute('data-id');
+                const isChecked = localStorage.getItem(id) === 'true';
+                checkbox.checked = isChecked;
+            });
+        }
+
+        // Function to save checkbox state
+        function saveCheckboxState(checkbox) {
+            const id = checkbox.getAttribute('data-id');
+            localStorage.setItem(id, checkbox.checked);
+        }
+
+        // Add event listeners to all checkboxes
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            
+            // Load saved states
+            loadCheckboxStates();
+
+            // Add change event listeners
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    saveCheckboxState(checkbox);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
