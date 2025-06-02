@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuiz: Seberapa Hijau Kamu?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        .option-card {
+            transition: all 0.3s ease;
+        }
+        .option-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .option-card.selected {
+            border-color: #10B981;
+            background-color: #ECFDF5;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-['Inter']">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center">
+                        <i class="fas fa-leaf text-green-500 text-2xl mr-2"></i>
+                        <span class="font-bold text-xl text-gray-800">Seberapa Hijau Kamu?</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition inline-block">
+                        Bagikan Hasilmu
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Quiz Container -->
+        <div id="quiz-container" class="bg-white rounded-xl shadow-sm p-8 mb-8">
+            <!-- Progress Bar -->
+            <div class="mb-8">
+                <div class="flex justify-between mb-2">
+                    <span class="text-sm font-medium text-gray-600" id="progress-text">Pertanyaan 1 dari 10</span>
+                    <span class="text-sm font-medium text-gray-600" id="score-text">Skor: 0</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div id="progress-bar" class="progress-bar bg-green-500 h-2.5 rounded-full" style="width: 10%"></div>
+                </div>
+            </div>
+            
+            <!-- Question Section -->
+            <div id="question-section">
+                <h1 class="text-3xl font-bold text-gray-900 mb-6" id="question-text">Bagaimana kebiasaan transportasi harian Anda?</h1>
+                
+                <!-- Options -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8" id="options-container">
+                    <!-- Options will be inserted here by JavaScript -->
+                </div>
+                
+                <!-- Navigation Buttons -->
+                <div class="flex justify-between mt-8">
+                    <button id="prev-btn" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 transition hidden">
+                        <i class="fas fa-arrow-left mr-2"></i>Sebelumnya
+                    </button>
+                    <button id="next-btn" class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition ml-auto">
+                        Selanjutnya <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                    <button id="submit-btn" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition hidden">
+                        Lihat Hasil <i class="fas fa-poll ml-2"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Results Section (Initially Hidden) -->
+            <div id="results-section" class="hidden text-center">
+                <div class="mb-8">
+                    <div class="w-32 h-32 mx-auto mb-6 rounded-full bg-green-100 flex items-center justify-center">
+                        <i class="fas fa-leaf text-5xl text-green-500"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2" id="result-title">Kamu Hijau Level Sedang!</h2>
+                    <p class="text-xl text-gray-600 mb-6" id="result-description">Kamu sudah melakukan beberapa praktik ramah lingkungan, tapi masih ada ruang untuk perbaikan!</p>
+                    
+                    <div class="max-w-md mx-auto mb-8">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-600">Skor Hijau Kamu</span>
+                            <span class="text-sm font-medium text-gray-600" id="final-score">75/100</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                            <div id="result-progress" class="progress-bar bg-green-500 h-4 rounded-full" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-green-50 rounded-xl p-6 mb-8 text-left">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Rekomendasi Untukmu:</h3>
+                    <ul class="space-y-3 text-gray-600" id="recommendations">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Coba gunakan transportasi umum atau bersepeda 2-3 kali seminggu</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Mulai memilah sampah organik dan anorganik di rumah</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span>Matikan peralatan elektronik saat tidak digunakan</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="flex justify-center space-x-4 mt-8">
+                    <button id="restart-btn" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition">
+                        <i class="fas fa-redo mr-2"></i>Ulangi Kuis
+                    </button>
+                    <button id="share-btn" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition">
+                        <i class="fas fa-share-alt mr-2"></i>Bagikan Hasil
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="bg-gradient-to-r from-green-500 to-blue-500 rounded-xl p-8 text-white text-center">
+            <h2 class="text-2xl font-bold mb-4">Ingin Lebih Hijau?</h2>
+            <p class="mb-6">Download panduan lengkap gaya hidup ramah lingkungan untuk pemula</p>
+            <button class="bg-white text-green-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition inline-block">
+                <i class="fas fa-download mr-2"></i>Download Panduan
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Tentang Kuis Ini</h3>
+                    <p class="text-sm">Kuis ini dirancang untuk meningkatkan kesadaran tentang gaya hidup ramah lingkungan dan memberikan rekomendasi personal.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Kontak</h3>
+                    <p class="text-sm">Email: info@hijauhidup.com</p>
+                    <p class="text-sm">Telepon: (021) 987-6543</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Ikuti Kami</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-white"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-sm">
+                <p>&copy; 2024 Hijau Hidup. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Quiz JavaScript -->
+    <script>
+        // Quiz Questions
+        const questions = [
+            {
+                question: "Bagaimana kebiasaan transportasi harian Anda?",
+                options: [
+                    { text: "Selalu menggunakan kendaraan pribadi (mobil/motor)", score: 0 },
+                    { text: "Kadang kendaraan pribadi, kadang transportasi umum", score: 3 },
+                    { text: "Sering berjalan kaki/bersepeda, kadang transportasi umum", score: 5 },
+                    { text: "Hanya berjalan kaki/bersepeda/transportasi umum", score: 7 }
+                ]
+            },
+            {
+                question: "Seberapa sering Anda menggunakan produk sekali pakai (plastik, sedotan, dll)?",
+                options: [
+                    { text: "Sangat sering, hampir setiap hari", score: 0 },
+                    { text: "Beberapa kali dalam seminggu", score: 2 },
+                    { text: "Jarang, hanya saat darurat", score: 4 },
+                    { text: "Hampir tidak pernah, selalu bawa alternatif sendiri", score: 6 }
+                ]
+            },
+            {
+                question: "Bagaimana kebiasaan Anda dalam menghemat listrik?",
+                options: [
+                    { text: "Tidak terlalu memperhatikan", score: 0 },
+                    { text: "Matikan lampu saat tidak digunakan", score: 2 },
+                    { text: "Matikan peralatan elektronik yang tidak digunakan", score: 4 },
+                    { text: "Gunakan peralatan hemat energi dan matikan semua yang tidak perlu", score: 6 }
+                ]
+            },
+            {
+                question: "Apa yang Anda lakukan dengan sampah elektronik (baterai, hp rusak, dll)?",
+                options: [
+                    { text: "Buang ke tempat sampah biasa", score: 0 },
+                    { text: "Kumpulkan tapi tidak tahu harus diapakan", score: 2 },
+                    { text: "Bawa ke dropbox sampah elektronik jika ada", score: 4 },
+                    { text: "Selalu bawa ke tempat daur ulang resmi", score: 6 }
+                ]
+            },
+            {
+                question: "Bagaimana kebiasaan belanja makanan Anda?",
+                options: [
+                    { text: "Sering beli makanan kemasan dan takeaway", score: 0 },
+                    { text: "Kadang bawa bekal, kadang beli", score: 3 },
+                    { text: "Sering bawa bekal dan wadah sendiri", score: 5 },
+                    { text: "Hampir selalu masak sendiri dan bawa wadah sendiri", score: 7 }
+                ]
+            },
+            {
+                question: "Apa yang Anda lakukan dengan sampah organik (sisa makanan, dll)?",
+                options: [
+                    { text: "Buang semua ke tempat sampah biasa", score: 0 },
+                    { text: "Pisahkan tapi tidak diolah", score: 2 },
+                    { text: "Kadang buat kompos", score: 4 },
+                    { text: "Selalu buat kompos atau berikan untuk pakan ternak", score: 6 }
+                ]
+            },
+            {
+                question: "Seberapa sering Anda membeli pakaian baru?",
+                options: [
+                    { text: "Sangat sering, mengikuti tren terbaru", score: 0 },
+                    { text: "Beberapa kali dalam setahun", score: 2 },
+                    { text: "Hanya saat benar-benar perlu", score: 4 },
+                    { text: "Hampir tidak pernah, lebih suka beli secondhand atau tukar baju", score: 6 }
+                ]
+            },
+            {
+                question: "Bagaimana kebiasaan penggunaan air Anda?",
+                options: [
+                    { text: "Tidak terlalu memperhatikan penghematan", score: 0 },
+                    { text: "Matikan keran saat gosok gigi", score: 2 },
+                    { text: "Gunakan air bekas untuk menyiram tanaman", score: 4 },
+                    { text: "Kumpulkan air hujan dan gunakan kembali air bekas", score: 6 }
+                ]
+            },
+            {
+                question: "Apa yang Anda lakukan dengan barang-barang yang sudah tidak terpakai?",
+                options: [
+                    { text: "Buang langsung", score: 0 },
+                    { text: "Kadang berikan ke orang lain", score: 2 },
+                    { text: "Sering berikan ke orang lain atau donasikan", score: 4 },
+                    { text: "Selalu cari cara untuk digunakan kembali atau didaur ulang", score: 6 }
+                ]
+            },
+            {
+                question: "Seberapa sering Anda mengikuti kegiatan lingkungan?",
+                options: [
+                    { text: "Tidak pernah", score: 0 },
+                    { text: "Pernah 1-2 kali", score: 2 },
+                    { text: "Beberapa kali dalam setahun", score: 4 },
+                    { text: "Aktif berpartisipasi dan mengorganisir kegiatan", score: 6 }
+                ]
+            }
+        ];
+
+        // Quiz Variables
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = Array(questions.length).fill(null);
+
+        // DOM Elements
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const progressText = document.getElementById('progress-text');
+        const progressBar = document.getElementById('progress-bar');
+        const scoreText = document.getElementById('score-text');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const quizContainer = document.getElementById('quiz-container');
+        const questionSection = document.getElementById('question-section');
+        const resultsSection = document.getElementById('results-section');
+        const resultTitle = document.getElementById('result-title');
+        const resultDescription = document.getElementById('result-description');
+        const finalScore = document.getElementById('final-score');
+        const resultProgress = document.getElementById('result-progress');
+        const recommendations = document.getElementById('recommendations');
+        const restartBtn = document.getElementById('restart-btn');
+        const shareBtn = document.getElementById('share-btn');
+
+        // Initialize Quiz
+        function initQuiz() {
+            showQuestion();
+            updateProgress();
+        }
+
+        // Show Current Question
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            questionText.textContent = question.question;
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+            
+            // Add new options
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = `option-card border-2 border-gray-200 p-4 rounded-lg cursor-pointer ${userAnswers[currentQuestion] === index ? 'selected' : ''}`;
+                optionElement.innerHTML = `
+                    <div class="flex items-center">
+                        <div class="h-5 w-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0 ${userAnswers[currentQuestion] === index ? 'bg-green-500 border-green-500' : ''}"></div>
+                        <span>${option.text}</span>
+                    </div>
+                `;
+                
+                optionElement.addEventListener('click', () => {
+                    selectOption(index);
+                });
+                
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Update button visibility
+            prevBtn.classList.toggle('hidden', currentQuestion === 0);
+            nextBtn.classList.toggle('hidden', currentQuestion === questions.length - 1);
+            submitBtn.classList.toggle('hidden', currentQuestion !== questions.length - 1);
+        }
+
+        // Select Option
+        function selectOption(optionIndex) {
+            // Remove previous score if already answered
+            if (userAnswers[currentQuestion] !== null) {
+                score -= questions[currentQuestion].options[userAnswers[currentQuestion]].score;
+            }
+            
+            // Add new score
+            userAnswers[currentQuestion] = optionIndex;
+            score += questions[currentQuestion].options[optionIndex].score;
+            
+            // Update UI
+            showQuestion();
+            updateProgress();
+        }
+
+        // Update Progress
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+            progressText.textContent = `Pertanyaan ${currentQuestion + 1} dari ${questions.length}`;
+            scoreText.textContent = `Skor: ${score}`;
+        }
+
+        // Next Question
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+                updateProgress();
+            }
+        }
+
+        // Previous Question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+                updateProgress();
+            }
+        }
+
+        // Show Results
+        function showResults() {
+            const maxScore = questions.reduce((sum, question) => {
+                return sum + Math.max(...question.options.map(option => option.score));
+            }, 0);
+            
+            const percentage = Math.round((score / maxScore) * 100);
+            finalScore.textContent = `${score}/${maxScore}`;
+            resultProgress.style.width = `${percentage}%`;
+            
+            // Determine result level
+            let title, description;
+            let recs = [];
+            
+            if (percentage >= 80) {
+                title = "Kamu Hijau Level Expert!";
+                description = "Kamu benar-benar mempraktikkan gaya hidup ramah lingkungan. Pertahankan dan terus inspirasikan orang lain!";
+                recs = [
+                    "Terus pertahankan kebiasaan baikmu",
+                    "Bagikan pengetahuanmu kepada orang lain",
+                    "Coba tantang dirimu untuk mencapai zero waste"
+                ];
+            } else if (percentage >= 60) {
+                title = "Kamu Hijau Level Advance!";
+                description = "Kamu sudah melakukan banyak praktik ramah lingkungan. Tingkatkan lagi untuk mencapai level yang lebih baik!";
+                recs = [
+                    "Coba kurangi penggunaan plastik sekali pakai",
+                    "Eksplor lebih banyak alternatif ramah lingkungan",
+                    "Ajak teman-teman untuk bergabung dalam gaya hidup hijau"
+                ];
+            } else if (percentage >= 40) {
+                title = "Kamu Hijau Level Sedang!";
+                description = "Kamu sudah melakukan beberapa praktik ramah lingkungan, tapi masih ada ruang untuk perbaikan!";
+                recs = [
+                    "Mulai pilah sampah organik dan anorganik",
+                    "Coba gunakan transportasi umum 2-3 kali seminggu",
+                    "Matikan peralatan elektronik saat tidak digunakan"
+                ];
+            } else {
+                title = "Kamu Hijau Level Pemula";
+                description = "Kamu baru memulai perjalanan hidup ramah lingkungan. Jangan khawatir, setiap langkah kecil berarti!";
+                recs = [
+                    "Mulai dengan membawa tas belanja sendiri",
+                    "Matikan lampu saat meninggalkan ruangan",
+                    "Bawa botol minum sendiri"
+                ];
+            }
+            
+            resultTitle.textContent = title;
+            resultDescription.textContent = description;
+            
+            // Update recommendations
+            recommendations.innerHTML = '';
+            recs.forEach(rec => {
+                const li = document.createElement('li');
+                li.className = 'flex items-start';
+                li.innerHTML = `
+                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                    <span>${rec}</span>
+                `;
+                recommendations.appendChild(li);
+            });
+            
+            // Show results section
+            questionSection.classList.add('hidden');
+            resultsSection.classList.remove('hidden');
+        }
+
+        // Restart Quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = Array(questions.length).fill(null);
+            
+            questionSection.classList.remove('hidden');
+            resultsSection.classList.add('hidden');
+            
+            showQuestion();
+            updateProgress();
+        }
+
+        // Share Results
+        function shareResults() {
+            // In a real app, this would share to social media
+            alert("Fitur berbagi akan mengirim hasil kuis ini ke media sosial atau kontak yang dipilih!");
+        }
+
+        // Event Listeners
+        nextBtn.addEventListener('click', nextQuestion);
+        prevBtn.addEventListener('click', prevQuestion);
+        submitBtn.addEventListener('click', showResults);
+        restartBtn.addEventListener('click', restartQuiz);
+        shareBtn.addEventListener('click', shareResults);
+
+        // Start the quiz
+        initQuiz();
+    </script>
+</body>
+</html>
